@@ -1,52 +1,85 @@
 #include "Czas.h"
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-void Czas::setGodziny(int x)
+int Czas::getGodzina()
 {
-	if (x >= 0 && x <= 23)
-		godziny = x;
+    return godziny;
 }
-void Czas::setMinuty(int x)
+
+int Czas::getMinuta()
 {
-	if (x >= 0 && x <= 59)
-		minuty = x;
+    return minuty;
 }
-void Czas::setSekundy(int x)
+
+int Czas::getSekunda()
 {
-	if (x >= 0 && x <= 59)
-		sekundy = x;
+    return sekundy;
 }
+
 void Czas::setCzas(int h, int m, int s)
 {
-	if (h >= 0 && h <= 23)
-		godziny = h;
-	else
-		godziny = 0;
+    if (h < 0)
+        h = 0;
+    if (m < 0)
+        m = 0;
+    if (s < 0)
+        s = 0;
 
-	if (m >= 0 && m <= 59)
-		minuty = m;
-	else
-		minuty = 0;
+    int sumaSekund = h * 3600 + m * 60 + s;
+    SecToTime(sumaSekund);
+}
 
-	if (s >= 0 && s <= 59)
-		sekundy = s;
-	else
-		sekundy = 0;
-}
-int Czas::getGodziny()
+void Czas::setCzas(int m, int s)
 {
-	return godziny;
+    if (m < 0)
+        m = 0;
+    if (s < 0)
+        s = 0;
+
+    int sumaSekund = m * 60 + s;
+    SecToTime(sumaSekund);
 }
-int Czas::getMinuty()
+
+void Czas::setCzas(int s)
 {
-	return minuty;
+    if (s < 0)
+        s = 0;
+
+    SecToTime(s);
 }
-int Czas::getSekundy()
-{
-	return sekundy;
-}
+
 void Czas::printCzas()
 {
-	cout << "Czas: " << godziny << ":" << minuty << ":" << sekundy << endl;
+    cout << "Czas: " << godziny << ":" << minuty << ":" << sekundy << endl;
+}
+
+int Czas::TimeToSec()
+{
+    return godziny * 3600 + minuty * 60 + sekundy;
+}
+
+void Czas::SecToTime(int x)
+{
+    if (x < 0)
+        x = 0;
+
+    godziny = x / 3600;
+    minuty = (x % 3600) / 60;
+    sekundy = x % 60;
+}
+
+Czas Czas::operator+(Czas& x)
+{
+    Czas wynik;
+    wynik.SecToTime(this->TimeToSec() + x.TimeToSec());
+    return wynik;
+}
+
+bool Czas::operator<(Czas& x)
+{
+    if(this->TimeToSec() < x.TimeToSec())
+        return true;
+    else
+        return false;
 }
