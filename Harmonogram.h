@@ -21,6 +21,4 @@ public:
 	Czas& operator[](int x);
 
 	void printHarmonogram();
-	Czas sumaCzasow();
-
 };
