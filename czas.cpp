@@ -49,6 +49,26 @@ void Czas::setCzas(int s)
     SecToTime(s);
 }
 
+Czas::Czas(int h, int m, int s)
+{
+    setCzas(h, m, s);
+}
+
+Czas::Czas(int m, int s)
+{
+    setCzas(m, s);
+}
+
+Czas::Czas(int s)
+{
+    setCzas(s);
+}
+
+Czas::Czas()
+{
+    setCzas(0);
+}
+
 void Czas::printCzas()
 {
     cout << "Czas: " << godziny << ":" << minuty << ":" << sekundy << endl;
@@ -76,9 +96,55 @@ Czas Czas::operator+(Czas& x)
     return wynik;
 }
 
+Czas& Czas::operator+=(Czas& x)
+{
+    this->SecToTime(this->TimeToSec() + x.TimeToSec());
+    return *this;
+}
+
+bool Czas::operator==(Czas& x)
+{
+    if (this->TimeToSec() == x.TimeToSec())
+        return true;
+    else
+        return false;
+}
+
 bool Czas::operator<(Czas& x)
 {
-    if(this->TimeToSec() < x.TimeToSec())
+    if (this->TimeToSec() < x.TimeToSec())
+        return true;
+    else
+        return false;
+}
+
+bool Czas::operator!=(Czas& x)
+{
+    if (this->TimeToSec() != x.TimeToSec())
+        return true;
+    else
+        return false;
+}
+
+bool Czas::operator>(Czas& x)
+{
+    if (this->TimeToSec() > x.TimeToSec())
+        return true;
+    else
+        return false;
+}
+
+bool Czas::operator<=(Czas& x)
+{
+    if (this->TimeToSec() <= x.TimeToSec())
+        return true;
+    else
+        return false;
+}
+
+bool Czas::operator>=(Czas& x)
+{
+    if (this->TimeToSec() >= x.TimeToSec())
         return true;
     else
         return false;
