@@ -50,15 +50,3 @@ void Harmonogram::printHarmonogram()
 		czas[i].printCzas();
 	}
 }
-
-Czas Harmonogram::sumaCzasow()
-{
-	Czas wynik;
-
-	for (int i = 0; i < liczbaCzasow; i++)
-	{
-		wynik += czas[i];
-	}
-
-	return wynik;
-}
