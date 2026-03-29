@@ -10,7 +10,7 @@ private:
 	int minuty = 0;
 	int sekundy = 0;
 
-	int TimeToSec();
+	int TimeToSec() const;
 	void SecToTime(int x);
 
 public:
@@ -29,13 +29,13 @@ public:
 
 	void printCzas();
 
-	Czas operator+(Czas& nowy);
-	Czas& operator+=(Czas& nowy);
+	Czas operator+(const Czas& nowy);
+	Czas& operator+=(const Czas& nowy);
 
-	bool operator==(Czas& nowy);
-	bool operator<(Czas& nowy);
-	bool operator!=(Czas& nowy);
-	bool operator>(Czas& nowy);
-	bool operator<=(Czas& nowy);
-	bool operator>=(Czas& nowy);
+	bool operator==(const Czas& nowy);
+	bool operator<(const Czas& nowy);
+	bool operator!=(const Czas& nowy);
+	bool operator>(const Czas& nowy);
+	bool operator<=(const Czas& nowy);
+	bool operator>=(const Czas& nowy);
 };
