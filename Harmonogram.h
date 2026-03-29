@@ -1,109 +1,29 @@
-#include "Harmonogram.h"
+#pragma once
 #include "Czas.h"
-#include <iostream>
+#include<iostream>
 
 using namespace std;
 
-Harmonogram::Harmonogram()
+class Harmonogram
 {
-	czas = nullptr;
-	rozmiar = 0;
-}
+private:
+	Czas* czas = nullptr;
+	int rozmiar = 0;
 
-Harmonogram::Harmonogram(const Harmonogram& newHarmonogram)
-{
-	rozmiar = newHarmonogram.rozmiar;
-	czas = new Czas[rozmiar];
-	for (int i = 0; i < rozmiar; i++)
-	{
-		czas[i] = newHarmonogram.czas[i];
-	}
-}
+public:
+	Harmonogram();
+	Harmonogram(const Harmonogram& newHarmonogram);
 
-Harmonogram::~Harmonogram()
-{
-	delete[] czas;
-}
+	~Harmonogram();
 
-void Harmonogram::addCzas(Czas& newCzas)
-{
-	Czas* TablicaCzas = new Czas[rozmiar+1];
-	for (int i = 0; i < rozmiar; i++)
-	{
-		TablicaCzas[i] = czas[i];
-	}
-	delete[] czas;
-	czas = TablicaCzas;
-	czas[rozmiar] = newCzas;
-	rozmiar++;
-}
+	void addCzas(Czas& newCzas);
+	void printHarmonogram();
 
-void Harmonogram::printHarmonogram()
-{
-	for (int i = 0; i < rozmiar; i++)
-	{
-		czas[i].printCzas();
-	}
-}
+	int getLiczbaCzasow();
 
-int Harmonogram::getLiczbaCzasow()
-{
-	return rozmiar;
-}
+	Czas& operator[](int x);
+	Czas sumaCzasow();
 
-Czas& Harmonogram::operator[](int x)
-{
-	if (x >= 0 && x < rozmiar)
-		return czas[x];
-}
-
-Czas Harmonogram::sumaCzasow()
-{
-	Czas wynik;
-
-	for (int i = 0; i < rozmiar; i++)
-	{
-		wynik += czas[i];
-	}
-
-	return wynik;
-}
-
-Harmonogram& Harmonogram::operator=(const Harmonogram& newHarmonogram)
-{
-	if (&newHarmonogram == this)
-		return *this;
-
-	delete[] czas;
-	rozmiar = newHarmonogram.rozmiar;
-	czas = new Czas[rozmiar];
-
-	for (int i = 0; i < rozmiar; i++)
-	{
-		czas[i] = newHarmonogram.czas[i];
-	}
-
-	return *this;
-}
-
-Harmonogram Harmonogram::kopiaDoZakresu(const Czas& zakres)
-{
-	Harmonogram nowyHarmonogram;
-	Czas suma;
-
-	for (int i = 0; i < rozmiar; i++)
-	{
-		suma += czas[i];
-
-		if (suma <= zakres)
-		{
-			nowyHarmonogram.addCzas(czas[i]);
-		}
-		else
-		{
-			break;
-		}
-	}
-
-	return nowyHarmonogram;
-}
+	Harmonogram& operator=(const Harmonogram& newHarmonogram);
+	Harmonogram kopiaDoZakresu(const Czas& zakres);
+};
