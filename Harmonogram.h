@@ -8,17 +8,22 @@ class Harmonogram
 {
 private:
 	Czas* czas = nullptr;
-	int liczbaCzasow = 0;
 	int rozmiar = 0;
 
 public:
 	Harmonogram();
+	Harmonogram(const Harmonogram& newHarmonogram);
+
 	~Harmonogram();
 
 	void addCzas(Czas& newCzas);
+	void printHarmonogram();
+
 	int getLiczbaCzasow();
 
 	Czas& operator[](int x);
+	Czas sumaCzasow();
 
-	void printHarmonogram();
+	Harmonogram& operator=(const Harmonogram& newHarmonogram);
+	Harmonogram kopiaDoZakresu(const Czas& zakres);
 };
