@@ -1,47 +1,43 @@
 #include "Czas.h"
+#include "Harmonogram.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    Czas c1, c2, c3, c4, c5, suma;
+    Harmonogram h1;
 
-    cout << "ustawCzas" << endl;
-    c1.setCzas(1, 2, 3);
-    c2.setCzas(4, 5);
-    c3.setCzas(6);
+    Czas c1(0,5,0), c2(0,10,0), c3(0, 15, 0), c4(0, 20, 0), c5(0, 25, 0);
 
-    c1.printCzas();
-    c2.printCzas();
-    c3.printCzas();
+    h1.addCzas(c1);
+    h1.addCzas(c2);
+    h1.addCzas(c3);
+    h1.addCzas(c4);
+    h1.addCzas(c5);
 
-    cout << endl;
-    cout << "wartosci ujemne" << endl;
-    c4.setCzas(83, -20);
-    c5.setCzas(3661);
+    cout << "Harmonogram h1:" << endl;
+    h1.printHarmonogram();
 
-    c4.printCzas();
-    c5.printCzas();
+    Harmonogram h2(h1);
 
     cout << endl;
-    cout << "dodawanie" << endl;
-    Czas a, b;
-    a.setCzas(1, 25, 40);
-    b.setCzas(0, 50, 30);
+    cout << "Harmonogram h2 - kopia h1:" << endl;
+    h2.printHarmonogram();
 
-    a.printCzas();
-    b.printCzas();
-
-    suma = a + b;
-    suma.printCzas();
+    Harmonogram h3;
+    h3 = h1;
 
     cout << endl;
-    cout << "porownanie" << endl;
-    if (a < b)
-        cout << "a < b" << endl;
-    else
-        cout << "a >= b" << endl;
+    cout << "Harmonogram h3 - po przypisaniu z h1:" << endl;
+    h3.printHarmonogram();
+
+    Czas zakres(0, 31, 0);
+    Harmonogram h4 = h1.kopiaDoZakresu(zakres);
+
+    cout << endl;
+    cout << "Harmonogram h4 - czasy mieszczace sie w zakresie 0:25:00:" << endl;
+    h4.printHarmonogram();
 
     return 0;
 }
