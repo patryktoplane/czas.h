@@ -74,7 +74,7 @@ void Czas::printCzas()
     cout << "Czas: " << godziny << ":" << minuty << ":" << sekundy << endl;
 }
 
-int Czas::TimeToSec()
+int Czas::TimeToSec() const
 {
     return godziny * 3600 + minuty * 60 + sekundy;
 }
@@ -89,20 +89,20 @@ void Czas::SecToTime(int x)
     sekundy = x % 60;
 }
 
-Czas Czas::operator+(Czas& x)
+Czas Czas::operator+(const Czas& x)
 {
     Czas wynik;
     wynik.SecToTime(this->TimeToSec() + x.TimeToSec());
     return wynik;
 }
 
-Czas& Czas::operator+=(Czas& x)
+Czas& Czas::operator+=(const Czas& x)
 {
     this->SecToTime(this->TimeToSec() + x.TimeToSec());
     return *this;
 }
 
-bool Czas::operator==(Czas& x)
+bool Czas::operator==(const Czas& x)
 {
     if (this->TimeToSec() == x.TimeToSec())
         return true;
@@ -110,7 +110,7 @@ bool Czas::operator==(Czas& x)
         return false;
 }
 
-bool Czas::operator<(Czas& x)
+bool Czas::operator<(const Czas& x)
 {
     if (this->TimeToSec() < x.TimeToSec())
         return true;
@@ -118,7 +118,7 @@ bool Czas::operator<(Czas& x)
         return false;
 }
 
-bool Czas::operator!=(Czas& x)
+bool Czas::operator!=(const Czas& x)
 {
     if (this->TimeToSec() != x.TimeToSec())
         return true;
@@ -126,7 +126,7 @@ bool Czas::operator!=(Czas& x)
         return false;
 }
 
-bool Czas::operator>(Czas& x)
+bool Czas::operator>(const Czas& x)
 {
     if (this->TimeToSec() > x.TimeToSec())
         return true;
@@ -134,7 +134,7 @@ bool Czas::operator>(Czas& x)
         return false;
 }
 
-bool Czas::operator<=(Czas& x)
+bool Czas::operator<=(const Czas& x)
 {
     if (this->TimeToSec() <= x.TimeToSec())
         return true;
@@ -142,7 +142,7 @@ bool Czas::operator<=(Czas& x)
         return false;
 }
 
-bool Czas::operator>=(Czas& x)
+bool Czas::operator>=(const Czas& x)
 {
     if (this->TimeToSec() >= x.TimeToSec())
         return true;
