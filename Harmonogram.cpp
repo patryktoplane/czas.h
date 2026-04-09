@@ -1,5 +1,6 @@
 #include "Harmonogram.h"
 #include "Czas.h"
+#include <time.h>
 #include <iostream>
 
 using namespace std;
@@ -57,7 +58,7 @@ Czas& Harmonogram::operator[](int x)
 		return czas[x];
 }
 
-Czas Harmonogram::sumaCzasow()
+Czas Harmonogram::sumaCzasow() const
 {
 	Czas wynik;
 
@@ -106,4 +107,29 @@ Harmonogram Harmonogram::kopiaDoZakresu(const Czas& zakres)
 	}
 
 	return nowyHarmonogram;
+}
+
+Harmonogram Harmonogram::operator--(int)
+{
+	Harmonogram staraKopia(*this);
+
+	if (rozmiar == 0)
+	{
+		return staraKopia;
+	}
+
+	Harmonogram nowyHarmonogram;
+	for (int i = 0; i < rozmiar - 1; i++)
+	{
+		nowyHarmonogram.addCzas(czas[i]);
+	}
+
+	*this = nowyHarmonogram;
+
+	return staraKopia;
+}
+
+bool Harmonogram::operator>(const Harmonogram& inny) const
+{
+	return this->sumaCzasow() > inny.sumaCzasow();
 }
