@@ -22,8 +22,11 @@ public:
 	int getLiczbaCzasow();
 
 	Czas& operator[](int x);
-	Czas sumaCzasow();
+	Czas sumaCzasow() const;
 
 	Harmonogram& operator=(const Harmonogram& newHarmonogram);
 	Harmonogram kopiaDoZakresu(const Czas& zakres);
+
+	Harmonogram operator--(int);
+	bool operator>(const Harmonogram& inny) const;
 };
