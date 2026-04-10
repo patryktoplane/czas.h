@@ -105,6 +105,12 @@ int main()
         cout << endl << "Przed sortowaniem:" << endl;
         printTablicaHarmonogramow(tablica, 3);
 
+
+        for (int i = 0; i < 3; i++)
+        {
+            tablica[i].sortujCzasy();
+        }
+
         bublesort(tablica, 3);
 
         cout << endl << "Po sortowaniu:" << endl;
