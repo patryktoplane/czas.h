@@ -133,3 +133,19 @@ bool Harmonogram::operator>(const Harmonogram& inny) const
 {
 	return this->sumaCzasow() > inny.sumaCzasow();
 }
+
+void Harmonogram::sortujCzasy()
+{
+	for (int i = 0; i < rozmiar - 1; i++)
+	{
+		for (int j = 0; j < rozmiar - 1 - i; j++)
+		{
+			if (czas[j] > czas[j + 1])
+			{
+				Czas temp = czas[j];
+				czas[j] = czas[j + 1];
+				czas[j + 1] = temp;
+			}
+		}
+	}
+}
