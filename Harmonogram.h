@@ -29,4 +29,6 @@ public:
 
 	Harmonogram operator--(int);
 	bool operator>(const Harmonogram& inny) const;
+
+	void sortujCzasy();
 };
